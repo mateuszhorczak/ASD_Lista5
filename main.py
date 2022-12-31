@@ -51,5 +51,3 @@ if __name__ == '__main__':
 
     list_with_results = []
     g.dfs(start_chamber, end_chamber, 0, sum_of_money, chamber_cost_list, list_with_results)
-    if not list_with_results:
-        print("Nie da sie")
