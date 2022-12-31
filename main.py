@@ -8,26 +8,23 @@ class Graph:
     def addEdge(self, u, v):
         self.graph[u].append(v)
 
-    def dfs(self, node, visited, end_node, sum_of_weight, result_weight, weights, results_list):
+    def dfs(self, node, end_node, sum_of_weight, result_weight, weights, results_list):
         if node == end_node:
             if sum_of_weight + weights[node] == result_weight:
                 results_list.append(node)
                 print("koniec - udalo sie")
                 print(results_list)
                 exit()
-            visited = set()
 
         if sum_of_weight + weights[node] > result_weight:
             return
 
-        if node not in visited:
-            if node != end_node:
-                visited.add(node)
+        if node != end_node:
             sum_of_weight += weights[node]
             results_list.append(node)
 
             for neighbour in self.graph[node]:
-                self.dfs(neighbour, visited, end_node, sum_of_weight, result_weight, weights, results_list)
+                self.dfs(neighbour, end_node, sum_of_weight, result_weight, weights, results_list)
 
             sum_of_weight -= weights[results_list[-1]]
             results_list.pop(-1)
@@ -61,7 +58,9 @@ if __name__ == '__main__':
 
     visited_list = set()
     list_with_results = []
-    g.dfs(start_chamber, visited_list, end_chamber, 0, sum_of_money, chamber_cost_list, list_with_results)
+    g.dfs(start_chamber, end_chamber, 0, sum_of_money, chamber_cost_list, list_with_results)
+    if not list_with_results:
+        print("Nie da sie")
 
     # graph = {
     #     '1': ['2', '3', '5'],
