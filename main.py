@@ -12,7 +12,6 @@ class Graph:
         if node == end_node:
             if sum_of_weight + weights[node] == result_weight:
                 results_list.append(node)
-                print("koniec - udalo sie")
                 print(results_list)
                 exit()
 
@@ -45,27 +44,12 @@ if __name__ == '__main__':
     for i in range(number_of_chambers):  # wagi komnat dla i-tej kolumny
         chamber_cost_list.append(data[i])
 
-    corridors = []  # korytarze, polaczenia w grafie
     for i in range(number_of_corridors):
         data = list(map(int, input().split()))
-        corridors.append(data)  # do usuniecia cale corridors
         g.addEdge(data[0], data[1])
         g.addEdge(data[1], data[0])
 
-    # print(number_of_chambers, number_of_corridors, start_chamber, end_chamber, sum_of_money)
-    # print(chamber_cost_list)
-    # print(corridors)
-
-    visited_list = set()
     list_with_results = []
     g.dfs(start_chamber, end_chamber, 0, sum_of_money, chamber_cost_list, list_with_results)
     if not list_with_results:
         print("Nie da sie")
-
-    # graph = {
-    #     '1': ['2', '3', '5'],
-    #     '2': ['3', '1', '4'],
-    #     '3': ['1', '2'],
-    #     '4': ['2', '5'],
-    #     '5': ['1', '4']
-    # }
